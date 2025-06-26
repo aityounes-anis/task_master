@@ -3,8 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { useModalStore } from "@/hooks/use-modal-store";
 
-export function NewProjectButton() {
+export function ProjectCreateButton() {
   const { open } = useModalStore();
 
-  return <Button onClick={() => open("projectCreate")}>+ New Project</Button>;
+  return (
+    <>
+      <Button onClick={() => open("projectCreate")}>Create new Projet</Button>
+    </>
+  );
 }
