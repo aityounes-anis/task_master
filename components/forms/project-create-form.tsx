@@ -19,6 +19,7 @@ import { fetcher } from "@/lib/fetcher";
 import { useModalStore } from "@/hooks/use-modal-store";
 import { toast } from "sonner";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   name: z.string().min(1, {
@@ -26,8 +27,13 @@ const formSchema = z.object({
   }),
 });
 
+type ProjectType = {
+  id: string;
+};
+
 export function ProjectCreateForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const { close } = useModalStore();
 
@@ -41,7 +47,7 @@ export function ProjectCreateForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsSubmitting(true);
-      await fetcher("/api/projects", {
+      const res = await fetcher<ProjectType>("/api/projects", {
         method: "POST",
         body: JSON.stringify(values),
         headers: {
@@ -51,7 +57,11 @@ export function ProjectCreateForm() {
 
       toast("Project Created Successfully!");
 
-      close(); // from useModalStore
+      close();
+
+      if (res?.id) {
+        router.push(`/projects/${res.id}`);
+      }
     } catch (error) {
       console.log(error);
       toast("Something went wrong!");
