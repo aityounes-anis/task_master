@@ -5,8 +5,12 @@ export async function fetcher<T>(
   const res = await fetch(input, init);
 
   if (!res.ok) {
-    const text = await res.text(); // ← catch HTML, plain text, JSON etc.
-    console.error("API error:", text); // 🔥 THIS WILL TELL YOU WHY
+    const text = await res.text();
+    console.error("API Error:", {
+      status: res.status,
+      statusText: res.statusText,
+      body: text,
+    });
     throw new Error(text || "Something went wrong");
   }
 

@@ -55,7 +55,7 @@ export function TaskCreateForm({ params }: { params: { projectId: string } }) {
     try {
       setIsSubmitting(true);
       const res = await fetcher<TaskFetchType>(
-        `/projects/${params.projectId}/tasks`,
+        `/api/projects/${params.projectId}/tasks`,
         {
           method: "POST",
           body: JSON.stringify({

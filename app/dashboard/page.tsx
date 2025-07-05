@@ -3,6 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { OnboardUser } from "../components/onboard-user";
 import { redirect } from "next/navigation";
 import { ProjectCreateButton } from "../components/project-create-button";
+import { ModalProvider } from "@/providers/modal-provider";
 
 export default async function Dashboard() {
   const user = await currentUser();
@@ -12,6 +13,7 @@ export default async function Dashboard() {
   return (
     <main>
       <OnboardUser />
+      <ModalProvider projectId="" />
       <h1>Welcome {user.firstName}</h1>
       <ProjectCreateButton />
       <UserButton />
