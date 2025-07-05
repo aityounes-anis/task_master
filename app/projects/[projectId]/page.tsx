@@ -1,3 +1,4 @@
+import { TaskCreateButton } from "@/app/components/task-create-button";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
@@ -27,6 +28,7 @@ export default async function ProjectPage({
   return (
     <div>
       {project.title}
+      <TaskCreateButton />
       <ul>
         {tasks?.map((task) => (
           <p key={task.id}>{task.title}</p>

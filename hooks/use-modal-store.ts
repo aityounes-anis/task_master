@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type ModalType = "projectCreate" | "taskEdit" | null;
+type ModalType = "projectCreate" | "taskCreate" | "taskEdit" | null;
 
 interface ModalState {
   type: ModalType;
